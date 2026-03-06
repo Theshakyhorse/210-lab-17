@@ -13,6 +13,8 @@ void output(Node *);
 void deleteN(Node *, int);
 void insertN(Node *, int);
 void deleteL(Node *);
+void frontN(Node *, Node *);
+void tailN(Node *, Node *);
 
 int main() {
     Node *head = nullptr;
@@ -42,10 +44,11 @@ int main() {
     cout << "Choice --> ";
     cin >> entry;
 
-    //delete Node
     deleteN(head, entry);
 
     insertN(head, entry);
+
+    deleteL(head);
 
     return 0;
 }
@@ -139,4 +142,26 @@ void deleteL(Node * head){
     
     head = nullptr;
     output(head);
+}
+
+void frontN(Node *head, Node *newnode){
+    if (!head) {
+        head = newnode;
+        newnode ->next=nullptr;
+    }
+    else{
+        newnode->next=head;
+        head = newnode;
+    }
+}
+
+void tailN(Node * head, Node *newnode){
+    if (!head) {
+        head = newnode;
+        newnode ->next=nullptr;
+    }
+    else{
+        newnode->next=head;
+        head = newnode;
+    }
 }
