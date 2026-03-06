@@ -11,7 +11,7 @@ struct Node {
 
 void output(Node *);
 void deleteN(Node *, int);
-void insertN(Node *, int);
+void insertN(Node *, int, Node *);
 void deleteL(Node *);
 void frontN(Node *, Node *);
 void tailN(Node *, Node *);
@@ -45,8 +45,6 @@ int main() {
     cin >> entry;
 
     deleteN(head, entry);
-
-    insertN(head, entry);
 
     deleteL(head);
 
@@ -91,7 +89,7 @@ void deleteN(Node *head, int entry) {
     output(head);
 }
 
-void insertN(Node *head, int entry) {
+void insertN(Node *head, int entry, Node *temp) {
     int count = 0;
     Node *current = head;
     Node *prev = nullptr;
@@ -131,7 +129,6 @@ void insertN(Node *head, int entry) {
 
 void deleteL(Node * head){
     Node *current = head;
-    Node *prev = nullptr;
     // deleting the linked list
     current = head;
     while (current) {
@@ -161,7 +158,13 @@ void tailN(Node * head, Node *newnode){
         newnode ->next=nullptr;
     }
     else{
-        newnode->next=head;
-        head = newnode;
+        Node *current = head;
+        while (current) {
+            if ((current -> next) == nullptr) {
+                current->next = newnode;
+                newnode ->next=nullptr;
+            }
+            current = current ->next;
+        }
     }
 }
