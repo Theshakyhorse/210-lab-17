@@ -11,7 +11,7 @@ struct Node {
 
 void output(Node *);
 void deleteN(Node *&, int);
-void insertN(Node *, int, Node *);
+void insertN(Node *&, int, Node *);
 void deleteL(Node *&);
 void frontN(Node *&, Node *);
 void tailN(Node *&, Node *);
@@ -64,6 +64,8 @@ int main() {
     Node *newnode = new Node;
     newnode->value = 10000;
 
+    insertN(head, entry, newnode);
+
     deleteL(head);
 
     return 0;
@@ -84,6 +86,7 @@ void output(Node *hd) {
     cout << endl;
 }
 
+//deletes a node
 void deleteN(Node *&head, int entry) {
     Node *current = head;
     Node *prev = nullptr;
@@ -107,12 +110,10 @@ void deleteN(Node *&head, int entry) {
     output(head);
 }
 
+//inserts a node at entry
 void insertN(Node *&head, int entry, Node *newnode) {
     Node *current = head;
     Node *prev = nullptr;
-
-    current = head;
-    prev = nullptr; // reset prev to nullptr for same reason
 
     for (int i = 0; i < entry; i++) {
         prev = current;
@@ -131,6 +132,7 @@ void insertN(Node *&head, int entry, Node *newnode) {
     output(head);
 }
 
+//deletes the entire list
 void deleteL(Node *&head){
     Node *current = head;
     // deleting the linked list
@@ -144,6 +146,7 @@ void deleteL(Node *&head){
     head = nullptr;
 }
 
+//adds a node to the front
 void frontN(Node *&head, Node *newnode){
     if (!head) {
         head = newnode;
@@ -155,6 +158,7 @@ void frontN(Node *&head, Node *newnode){
     }
 }
 
+//adds a node to the tail
 void tailN(Node *&head, Node *newnode){
     if (!head) {
         head = newnode;
