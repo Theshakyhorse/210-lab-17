@@ -10,6 +10,8 @@ struct Node {
 };
 
 void output(Node *);
+void deleteN(Node *, int);
+void insertN(Node *, int);
 
 int main() {
     Node *head = nullptr;
@@ -34,34 +36,19 @@ int main() {
     }
     output(head);
 
-    // deleting a node
+// deleting a node
     cout << "Which node to delete? " << endl;
     output(head);
     int entry;
     cout << "Choice --> ";
     cin >> entry;
 
+    //delete Node
+    deleteN(head, entry);
+    
     // traverse that many times and delete that node
     Node *current = head;
     Node *prev = nullptr; // start prev as nullptr to detect head deletion
-
-    for (int i = 0; i < (entry - 1); i++) {
-        prev = current;
-        current = current->next;
-    }
-
-    // at this point, delete current and reroute pointers
-    if (current) {
-        if (prev == nullptr) {
-            // deleting the head node
-            head = current->next;
-        } else {
-            prev->next = current->next;
-        }
-        delete current;
-        current = nullptr;
-    }
-    output(head);
 
     // insert a node
     cout << "After which node to insert 10000? " << endl;
@@ -122,4 +109,32 @@ void output(Node *hd) {
         current = current->next;
     }
     cout << endl;
+}
+
+void deleteN(Node *head, int entry) {
+    // traverse that many times and delete that node
+    Node *current = head;
+    Node *prev = nullptr; // start prev as nullptr to detect head deletion
+
+    for (int i = 0; i < (entry - 1); i++) {
+        prev = current;
+        current = current->next;
+    }
+
+    // at this point, delete current and reroute pointers
+    if (current) {
+        if (prev == nullptr) {
+            // deleting the head node
+            head = current->next;
+        } else {
+            prev->next = current->next;
+        }
+        delete current;
+        current = nullptr;
+    }
+    output(head);
+}
+
+void insertN(Node *head, int entry) {
+
 }
