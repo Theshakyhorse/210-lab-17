@@ -10,7 +10,7 @@ struct Node {
 };
 
 void output(Node *);
-void deleteN(Node *, int);
+void deleteN(Node *&, int);
 void insertN(Node *, int, Node *);
 void deleteL(Node *&);
 void frontN(Node *&, Node *);
@@ -18,6 +18,7 @@ void tailN(Node *&, Node *);
 
 int main() {
     Node *head = nullptr;
+    int count = 0;
 
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
@@ -46,6 +47,23 @@ int main() {
 
     deleteN(head, entry);
 
+    Node *current = head;
+    Node *prev = nullptr;
+
+    // insert a node
+    cout << "After which node to insert 10000? " << endl;
+    count = 1;
+    current = head;
+    while (current) {
+        cout << "[" << count++ << "] " << current->value << endl;
+        current = current->next;
+    }
+    cout << "Choice --> ";
+    cin >> entry;
+
+    Node *newnode = new Node;
+    newnode->value = 10000;
+
     deleteL(head);
 
     return 0;
@@ -66,7 +84,7 @@ void output(Node *hd) {
     cout << endl;
 }
 
-void deleteN(Node *head, int entry) {
+void deleteN(Node *&head, int entry) {
     Node *current = head;
     Node *prev = nullptr;
 
@@ -89,21 +107,9 @@ void deleteN(Node *head, int entry) {
     output(head);
 }
 
-void insertN(Node *head, int entry, Node *temp) {
-    int count = 0;
+void insertN(Node *&head, int entry, Node *newnode) {
     Node *current = head;
     Node *prev = nullptr;
-
-    // insert a node
-    cout << "After which node to insert 10000? " << endl;
-    count = 1;
-    current = head;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << "Choice --> ";
-    cin >> entry;
 
     current = head;
     prev = nullptr; // reset prev to nullptr for same reason
@@ -114,8 +120,6 @@ void insertN(Node *head, int entry, Node *temp) {
     }
     
     // at this point, insert a node between prev and current
-    Node *newnode = new Node;
-    newnode->value = 10000;
     newnode->next = current;
 
     if (prev == nullptr) {
